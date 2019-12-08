@@ -1,0 +1,16 @@
+1. 分割字符串使用split，如果其中包含多个空格，则直接调用，不用添加参数
+2. 直接读文本数据，得到的是字符串类型的矩阵，绘图的时候会有问题。可以在矩阵
+   生成时就使用arange(list,dtype)，之后可以通过np.astype(np.type)进行
+   修改。
+3. 图例的生成，图例生成时首先依靠绘图时的 label参数，如果这个参数在绘图时
+   已经输入，那么后面可以直接生成legned()；如果label参数在调用函数时没有
+   给出，那么就需要自定义一个图例：
+   这部分代码不是很懂，参看网址后获得代码如下：
+   patches = [mpatches.Patch(color = color_[i],label = "{:s}".format(legend_[i]))
+         for i in range(len(color_))]
+   ax = plt.gca()
+   ax.legend(handles = patches,)
+4. 图例的位置控制，使用bbox_to_anchor()来确定坐标系的圆心，使用loc=""
+   控制方向。一般而言，坐标系的圆心被定义为坐标周的左下角，然后坐标周宽度和
+   高度为1,可以使用bbox_to_anchor()=(0,1)，这样就把圆心调整到了左上角，
+   然后通过loc控制图例方向即可。
